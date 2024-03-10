@@ -1,0 +1,8 @@
+/__pycache__/
+/Include/
+/Lib/
+/Scripts/
+/share/
+*analysis_data copy.ipynb
+*pyvenv.cfg
+*Untitled1.ipynb
