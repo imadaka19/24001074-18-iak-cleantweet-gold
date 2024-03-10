@@ -22,14 +22,6 @@ python app.py
 
 Access the API documentation by opening [http://127.0.0.1:5000/docs](http://127.0.0.1:5000/docs) in your browser. The API offers two endpoints:
 
-1. **text_processing:** 
-   
-2. **text-processing-file:** 
-
-
-
-
-
 ### 1. clean_teks
 
 This endpoint requires inputting text and several additional parameters for processing.
