@@ -40,13 +40,48 @@ swagger = Swagger(app, template=swagger_template,
 @app.route('/clean_teks', methods=['POST'])
 def input_teks():
     data = request.form.get('text')
+    hs = int(request.args.get('hs'))
+    abusive = int(request.args.get('abusive'))
+    target = request.args.get('target')
+    topic = request.args.get('topic')
+    level = request.args.get('level')
+
+    dict = {
+        'Tweet':'', 
+        'HS':0, 
+        'Abusive':0,
+        'HS_Individual':0, 
+        'HS_Group':0, 
+        'HS_Religion':0, 
+        'HS_Race':0, 
+        'HS_Physical':0, 
+        'HS_Gender':0, 
+        'HS_Other':0,
+        'HS_Weak':0, 
+        'HS_Moderate':0, 
+        'HS_Strong':0,
+        'Tweet_Cleaned':''
+    }
+    dict['Tweet'] = data
+    
     data = re.sub(r'\\n', ' ', data) #hapus \\n
     data = re.sub(r'\bRT\b|\brt\b',' ', data) #hapus rt
     data_cleaned = clean.clean_data(data) #clean data input
 
-    json_response = {
-        'output': data_cleaned,
-    }
+    dict['HS'] = hs
+    dict['Abusive'] = abusive
+
+    if target != 'None':
+        dict[target] = 1
+    if topic != 'None':
+        dict[topic] = 1
+    if level != 'None':
+        dict[level] = 1
+
+    dict['Tweet_Cleaned'] = data_cleaned
+    db.create_text_db(dict)
+    json_response = dict
+    
     return jsonify(json_response)
 
 @swag_from("docs/text_processing_file.yml", methods=['POST'])

@@ -61,3 +61,33 @@ def create_db(df):
     
     conn.commit()
     conn.close()
+
+def create_text_db(dict):
+    conn = sqlite3.connect('challenge_database.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS tweet_table (
+        Tweet TEXT,
+        HS INTEGER,
+        Abusive INTEGER,
+        HS_Individual INTEGER,
+        HS_Group INTEGER,
+        HS_Religion INTEGER,
+        HS_Race INTEGER,
+        HS_Physical INTEGER,
+        HS_Gender INTEGER,
+        HS_Other INTEGER,
+        HS_Weak INTEGER,
+        HS_Moderate INTEGER,
+        HS_Strong INTEGER,
+        Tweet_Cleaned TEXT
+    )
+    ''')
+    columns = ', '.join(dict.keys())
+    placeholders = ', '.join(['?'] * len(dict))
+    values = list(dict.values())
+
+    query = f"INSERT INTO tweet_table ({columns}) VALUES ({placeholders})"
+    cursor.execute(query, values)
+    conn.commit()
+    conn.close()

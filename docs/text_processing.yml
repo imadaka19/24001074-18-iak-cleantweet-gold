@@ -1,5 +1,6 @@
 tags:
   - name: Text Processing
+
 get:
   description: Teks yang akan diproses
 
@@ -8,16 +9,52 @@ parameters:
     in: formData
     required: true
     type: string
-  # - name: umur
-  #   in: formData
-  #   required: true
-  #   type: integer
+
+  - name: hs
+    in: query
+    description: hs
+    required: true
+    type: integer
+    enum: [0, 1]
+
+  - name: abusive
+    in: query
+    description: abusive
+    required: true
+    type: integer
+    enum: [0, 1]
+
+  - name: target
+    in: query
+    description: target
+    required: true
+    type: string
+    enum: [HS_Individual, HS_Group, None]
+
+  - name: topic
+    in: query
+    description: topic
+    required: true
+    type: string
+    enum: [HS_Religion, HS_Race, HS_Physical, HS_Gender, HS_Other, None]
+
+  - name: level
+    in: query
+    description: level
+    required: true
+    type: string
+    enum: [HS_Weak, HS_Moderate, HS_Strong, None]
+
+# Uncomment and fix the indentation for the umur parameter if needed
+# - name: umur
+#   in: formData
+#   required: true
+#   type: integer
 
 responses:
-    '200':
-      description: Successful response
-    '400':
-      description: Bad Request
-    '500':
-      description: Internal Server Error
-
+  '200':
+    description: Successful response
+  '400':
+    description: Bad Request
+  '500':
+    description: Internal Server Error

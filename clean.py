@@ -12,7 +12,7 @@ def norm_alay(data):
     return ' '.join([kamus_alay_dict[word] if word in kamus_alay_dict else word for word in data.split(' ')]) #mengganti kata di kamus alay
 
 def remove_stopwords(data):
-    return " ".join(x for x in x.split() if x not in stopword_table.stopword.values.tolist())
+    return " ".join(x for x in data.split() if x not in stopword_table.stopword.values.tolist())
     # return ' '.join([word for word in data.split() if all(stop not in word for stop in set(stopword_table['stopword']))]) #menghapus kata yang ada di stopword_table
 
 def clean_data(data):
